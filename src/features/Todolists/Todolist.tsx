@@ -6,7 +6,7 @@ import { AddItemForm } from '../../components/AddItemForm/AddItemForm';
 import { EditableSpan } from '../../components/EditableSpan/EditableSpan';
 import { Task } from '../Tasks/Task';
 import { addTaskAC, TaskType } from '../Tasks/tasks-reducer';
-import { changeTodolistFilterAC, FilterValuesType, removeTodolistAC } from './todolist-reducer';
+import { changeTodolistFilterAC, changeTodolistTitleAC, FilterValuesType, removeTodolistAC } from './todolist-reducer';
 
 
 type PropsType = {
@@ -27,6 +27,9 @@ export function Todolist(props: PropsType) {
     const removeTodolist = () => {
         dispatch(removeTodolistAC(props.id))
     }
+    const changeTodolistTitle = (title: string) => {
+        dispatch(changeTodolistTitleAC(props.id, title))
+    }
 
     const onAllClickHandler = () => {
         dispatch(changeTodolistFilterAC(props.id, 'all'))
@@ -39,7 +42,7 @@ export function Todolist(props: PropsType) {
     }
 
     return <div>
-        <h3><EditableSpan value={props.title} onChange={() => {}} />
+        <h3><EditableSpan value={props.title} onChange={changeTodolistTitle} />
             <IconButton onClick={removeTodolist}>
                 <Delete />
             </IconButton>
